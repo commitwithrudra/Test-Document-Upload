@@ -56,7 +56,12 @@ app.post("/upload-to-drive", async (req, res) => {
       });
     }
 
-    const fullUrl = `http://127.0.0.1:8001/${file_url}`;
+    const BASE_URL = "http://127.0.0.1:8001";
+
+    const fullUrl = file_url.startsWith("http")
+      ? file_url
+      : `${BASE_URL}${file_url}`;
+
     console.log("⬇️ Downloading:", fullUrl);
 
     // 📥 Download file as stream
